@@ -114,10 +114,6 @@
     <h2>Token-opbevaring</h2>
     <p>OAuth-tokens (de tekniske nøgler der giver Skematisk adgang til OneDrive) gemmes <strong>krypteret lokalt</strong> via operativsystemets indbyggede sikkerhed: macOS Keychain på Mac, DPAPI på Windows. Tokens forlader aldrig den enkelte maskine.</p>
 
-    <h2>Datafortrolighed</h2>
-    <p>Skematisk håndterer <strong>ingen patientdata, ingen studieoplysninger med personhenførbare detaljer</strong>. Det er et planlægningsværktøj til skemaer — undervisere, lokaler, semestre, forløb. Ingen GDPR-følsomme persondata passerer gennem appen som en del af det normale brug.</p>
-    <p>Detaljer om hvilke data der gemmes hvor findes på <a href="/persondata.html">Persondata-siden</a>.</p>
-
     <h2>Levering og opdateringer</h2>
     <div class="callout callout-info">
       <strong>Under udvikling:</strong> Kodesignering med <strong>Windows EV-certifikat</strong> er planlagt inden første pilotinstallation. Det betyder at Windows ikke viser SmartScreen-advarsler ved installation. Microsoft Publisher Verification (fjerner "unverified" badge på samtykke-skærmen) er ligeledes på vej.
@@ -141,16 +137,8 @@
       <li>Auto-backup hver 5. minut + OneDrive version history</li>
     </ul>
 
-    <h3>GDPR / Persondataforordningen — Aligned, ikke databehandler</h3>
-    <p>Vi opbevarer ingen kundedata på egne servere. Dermed er vi <strong>ikke databehandler</strong> i GDPR-forstand — Microsoft (jeres OneDrive-udbyder) er den faktiske databehandler dækket af jeres egne Microsoft 365-aftaler.</p>
-    <ul>
-      <li>Ingen telemetri eller analytics i Skematisk-app</li>
-      <li>Ingen patientdata, ingen studieoplysninger med personhenførbare detaljer (no-PII scope)</li>
-      <li>Dataminimering — kun planlægningsmetadata</li>
-      <li>Datalagring i jeres egen Microsoft 365 tenant — I bestemmer placering, retention, sletning</li>
-      <li>Hjemmeside skematisk.dk: ingen cookies, ingen tracking</li>
-    </ul>
-    <p>Detaljeret behandling af persondata-spørgsmål: se <a href="/persondata.html">Persondata &amp; GDPR</a>.</p>
+    <h3>GDPR / Persondataforordningen</h3>
+    <p>Den juridiske position — rollefordeling (dataansvarlig vs databehandler), konkrete GDPR-aligned tiltag pr. princip, og de registreredes rettigheder — er beskrevet på <a href="/persondata.html">Persondata &amp; GDPR-siden</a>.</p>
 
     <h3>OWASP — Aligned hvor relevant for desktop-app</h3>
     <p>OWASP Top 10 fokuserer primært på web-applikationer; for en Electron-desktop-app er en delmængde relevant:</p>
