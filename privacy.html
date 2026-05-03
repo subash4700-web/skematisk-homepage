@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privatliv — Skematisk</title>
+  <meta name="description" content="Skematisks privatlivspolitik: ingen kundedata på vores servere, OneDrive-baseret arkitektur, GDPR-status.">
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">📅</text></svg>'>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --purple: #667eea; --purple-dark: #5a67d8; --purple-end: #764ba2;
+      --lavender: #a78bfa; --navy: #1F2937;
+      --gray50: #F9FAFB; --gray100: #E5E7EB; --gray400: #9CA3AF;
+      --gray600: #4B5563; --gray900: #111827;
+      --warn-bg: #fef3c7; --warn-text: #92400e;
+      --info-bg: #dbeafe; --info-text: #1e40af;
+      --good-bg: #d1fae5; --good-text: #065f46;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #fff; color: var(--navy); line-height: 1.65; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray100); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 58px; }
+    .nav-logo { font-size: 1rem; font-weight: 800; background: linear-gradient(135deg, var(--purple), var(--purple-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; letter-spacing: -.01em; display: flex; align-items: center; gap: .5rem; }
+    .nav-logo-emoji { -webkit-text-fill-color: initial; background: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--gray600); text-decoration: none; font-size: .875rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--purple); }
+
+    .page-hero { padding: 64px 2rem 32px; background: linear-gradient(135deg, #4c51bf 0%, var(--purple) 50%, var(--purple-end) 100%); color: white; text-align: center; }
+    .page-hero h1 { font-size: clamp(1.75rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -.02em; margin-bottom: .5rem; }
+    .page-hero p { font-size: 1rem; color: rgba(255,255,255,.8); max-width: 580px; margin: 0 auto; }
+    .preliminary-badge { display: inline-block; background: var(--warn-bg); color: var(--warn-text); font-size: .68rem; font-weight: 800; padding: 4px 11px; border-radius: 6px; letter-spacing: .8px; margin-bottom: 1rem; text-transform: uppercase; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 56px 2rem 72px; }
+    main h2 { font-size: 1.4rem; font-weight: 800; color: var(--gray900); margin: 2.25rem 0 .75rem; letter-spacing: -.01em; }
+    main h2:first-child { margin-top: 0; }
+    main h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray900); margin: 1.5rem 0 .5rem; }
+    main p { font-size: .98rem; color: var(--gray600); margin-bottom: 1rem; }
+    main ul { padding-left: 1.4rem; margin-bottom: 1rem; }
+    main li { font-size: .98rem; color: var(--gray600); margin-bottom: .4rem; }
+    main a { color: var(--purple); text-decoration: none; }
+    main a:hover { text-decoration: underline; }
+    main code { background: var(--gray50); padding: 2px 6px; border-radius: 4px; font-size: .88em; font-family: 'SF Mono', Menlo, monospace; }
+
+    .callout { padding: 16px 20px; border-radius: 10px; font-size: .92rem; line-height: 1.55; margin: 1rem 0; }
+    .callout-warn { background: var(--warn-bg); color: var(--warn-text); border-left: 4px solid var(--warn-text); }
+    .callout-info { background: var(--info-bg); color: var(--info-text); border-left: 4px solid var(--info-text); }
+    .callout-good { background: var(--good-bg); color: var(--good-text); border-left: 4px solid var(--good-text); }
+    .callout strong { font-weight: 700; }
+
+    footer { background: var(--navy); color: rgba(255,255,255,.7); padding: 48px 2rem 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
+    .footer-brand { font-size: 1rem; font-weight: 800; color: white; margin-bottom: .5rem; display: flex; align-items: center; gap: .4rem; }
+    .footer-tag { font-size: .8rem; color: rgba(255,255,255,.55); max-width: 320px; line-height: 1.55; }
+    .footer-meta { font-size: .75rem; color: rgba(255,255,255,.45); text-align: right; }
+    .footer-meta a { color: rgba(255,255,255,.7); text-decoration: none; }
+    .footer-meta a:hover { color: white; }
+    .footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); font-size: .72rem; color: rgba(255,255,255,.4); text-align: center; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1.1rem; font-size: .8rem; }
+      .page-hero, main, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .footer-inner { flex-direction: column; }
+      .footer-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo"><span class="nav-logo-emoji">📅</span> Skematisk</a>
+    <ul class="nav-links">
+      <li><a href="/#funktioner">Funktioner</a></li>
+      <li><a href="/#hvem">Hvem er det til</a></li>
+      <li><a href="/security.html">Sikkerhed</a></li>
+      <li><a href="/privacy.html" class="active">Privatliv</a></li>
+      <li><a href="/contact.html">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-hero">
+    <span class="preliminary-badge">FORELØBIG</span>
+    <h1>Privatliv</h1>
+    <p>Hvilke data Skematisk håndterer — og hvilke data vi som leverandør aldrig ser.</p>
+  </section>
+
+  <main>
+
+    <div class="callout callout-warn">
+      <strong>Foreløbig version.</strong> Denne side beskriver Skematisks aktuelle databehandling, men er endnu ikke en fuld GDPR-compliant privatlivspolitik. Endelig version, inklusive databehandleraftale-skabelon, vil være klar inden første rigtige pilot. Indtil da, kontakt os direkte hvis I har specifikke databeskyttelsesspørgsmål.
+    </div>
+
+    <h2>Den korte version</h2>
+    <p>Skematisk er bygget så <strong>vi som leverandør aldrig ser jeres data</strong>. Al planlægningsdata bliver enten lokalt på den enkelte maskine eller i jeres egen Microsoft 365 OneDrive. Vi har ingen central database og ingen automatisk adgang til kundernes filer.</p>
+
+    <div class="callout callout-good">
+      <strong>Ingen patientdata. Ingen studieoplysninger med personhenførbare detaljer.</strong> Skematisk håndterer kun planlægningsmetadata: undervisere, lokaler, semestre, forløb, eksamener. Ingen GDPR-følsomme persondata passerer gennem appen som en del af det normale brug.
+    </div>
+
+    <h2>Hvilke data behandler Skematisk?</h2>
+
+    <h3>Data Skematisk håndterer (inden i jeres miljø)</h3>
+    <ul>
+      <li>Underviseroplysninger: navn, email, fag, tilgængelige dage, ferier (fungerer som arbejdsoplysninger, ikke følsomme persondata)</li>
+      <li>Lokaler og kampusser: navne, kapaciteter, type</li>
+      <li>Semestre, perioder, hold, forløb og emner</li>
+      <li>Eksamensplaner og prøver</li>
+      <li>Skemaer (undervisere → lokaler → tider)</li>
+    </ul>
+    <p>Disse data bliver kun i jeres infrastruktur — lokalt på maskinen, eller i jeres egen Microsoft 365 OneDrive (hvis I aktiverer OneDrive-synkronisering).</p>
+
+    <h3>Data Skematisk IKKE håndterer</h3>
+    <ul>
+      <li>❌ Studerende eller deres karakterer</li>
+      <li>❌ Patientdata</li>
+      <li>❌ Sundhedsoplysninger</li>
+      <li>❌ Personnumre eller andre særlige kategorier af persondata</li>
+    </ul>
+
+    <h2>Hvor ligger data?</h2>
+    <p>Tre lokationer, alle inden for jeres kontrol:</p>
+    <ul>
+      <li><strong>Lokalt på medarbejderens maskine</strong> — i app-data-mappen (macOS: <code>~/Library/Application Support/Skematisk</code>, Windows: <code>%APPDATA%\Skematisk</code>). Krypteret af operativsystemet hvis maskinens disk er krypteret (FileVault/BitLocker).</li>
+      <li><strong>I jeres egen Microsoft 365 OneDrive</strong> — hvis OneDrive-synkronisering er aktiveret. Microsoft er databehandler for hosting; data forbliver inden for jeres tenant og underlagt jeres egne Microsoft 365-aftaler.</li>
+      <li><strong>Lokalt eksporterede backup-filer</strong> — Skematisk laver automatiske lokale backups (max 30 stk, ældste roteres ud).</li>
+    </ul>
+
+    <h2>Vores rolle som leverandør</h2>
+    <p>Vi (Skematisk-udvikleren) er <strong>ikke databehandler</strong> i GDPR-forstand for de data I lægger ind i appen — fordi vi simpelthen ikke har adgang til dem. Microsoft (jeres OneDrive-udbyder) er den faktiske databehandler for hostede filer, dækket af jeres eksisterende Microsoft 365-aftaler.</p>
+
+    <h2>Cookies og sporing på denne hjemmeside</h2>
+    <p>Hjemmesiden <code>skematisk.dk</code> sætter <strong>ingen cookies</strong> og bruger <strong>ingen analytics-tracking</strong> (Google Analytics el. lign.). Vi har ingen behov for at tracke hvem der besøger siden.</p>
+    <p>Hosting er Vercel (USA-baseret CDN). Standard server-logs (IP-adresse, anmodningstidspunkt) opbevares af Vercel i op til 30 dage til driftsformål — se <a href="https://vercel.com/legal/privacy-policy" rel="noopener" target="_blank">Vercels privatlivspolitik</a>.</p>
+
+    <h2>Hvis I bruger e-mail-kontakt</h2>
+    <p>Hvis I sender os en email (via "Kontakt"-linket), opbevares den i vores indbakke (Hotmail/Outlook) så længe det er relevant for at besvare jeres henvendelse. I kan til enhver tid bede os om at slette korrespondancen.</p>
+
+    <h2>Support og fejlfinding</h2>
+    <p>Hvis I beder om hjælp til en konkret fil, eksporterer I selv filen og sender den. Vi henter aldrig data fra jeres systemer eller OneDrive uden eksplicit handling fra jer. Efter support er afsluttet, sletter vi vores lokale kopi.</p>
+
+    <h2>Jeres rettigheder</h2>
+    <p>Da vi som udgangspunkt ikke har persondata om jer eller jeres brugere, har I fuld kontrol gennem jeres egen Microsoft 365-administration. Hvis I undtagelsesvis har sendt os data via support-flow, kan I anmode om indsigt eller sletning ved at <a href="/contact.html">kontakte os</a>.</p>
+
+    <h2>Ændringer</h2>
+    <p>Når denne side opgraderes fra "FORELØBIG" til den endelige privatlivspolitik, vil alle pilotkunder få direkte besked. Indtil da kan dokumentet ændre sig løbende.</p>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">📅 Skematisk</div>
+        <div class="footer-tag">Koordineret skemaplanlægning til videregående uddannelser. Udviklet i Danmark.</div>
+      </div>
+      <div class="footer-meta">
+        <div><a href="/security.html">Sikkerhed</a> · <a href="/privacy.html">Privatliv</a> · <a href="/contact.html">Kontakt</a></div>
+        <div style="margin-top:.6rem;color:rgba(255,255,255,.55);">Status: Beta — pilotprojekter åbne</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Skematisk. Alle rettigheder forbeholdes.
+    </div>
+  </footer>
+
+</body>
+</html>

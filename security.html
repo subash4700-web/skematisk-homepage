@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sikkerhed — Skematisk</title>
+  <meta name="description" content="Skematisks sikkerhedsarkitektur: data forbliver i kundens egen OneDrive, Microsoft-autentifikation, kryptering, ingen tredjeparts-servere.">
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">📅</text></svg>'>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --purple: #667eea; --purple-dark: #5a67d8; --purple-end: #764ba2;
+      --lavender: #a78bfa; --navy: #1F2937;
+      --gray50: #F9FAFB; --gray100: #E5E7EB; --gray400: #9CA3AF;
+      --gray600: #4B5563; --gray900: #111827;
+      --warn-bg: #fef3c7; --warn-text: #92400e;
+      --info-bg: #dbeafe; --info-text: #1e40af;
+      --good-bg: #d1fae5; --good-text: #065f46;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #fff; color: var(--navy); line-height: 1.65; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray100); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 58px; }
+    .nav-logo { font-size: 1rem; font-weight: 800; background: linear-gradient(135deg, var(--purple), var(--purple-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; letter-spacing: -.01em; display: flex; align-items: center; gap: .5rem; }
+    .nav-logo-emoji { -webkit-text-fill-color: initial; background: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--gray600); text-decoration: none; font-size: .875rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--purple); }
+
+    .page-hero { padding: 64px 2rem 32px; background: linear-gradient(135deg, #4c51bf 0%, var(--purple) 50%, var(--purple-end) 100%); color: white; text-align: center; }
+    .page-hero h1 { font-size: clamp(1.75rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -.02em; margin-bottom: .5rem; }
+    .page-hero p { font-size: 1rem; color: rgba(255,255,255,.8); max-width: 580px; margin: 0 auto; }
+    .preliminary-badge { display: inline-block; background: var(--warn-bg); color: var(--warn-text); font-size: .68rem; font-weight: 800; padding: 4px 11px; border-radius: 6px; letter-spacing: .8px; margin-bottom: 1rem; text-transform: uppercase; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 56px 2rem 72px; }
+    main h2 { font-size: 1.4rem; font-weight: 800; color: var(--gray900); margin: 2.25rem 0 .75rem; letter-spacing: -.01em; }
+    main h2:first-child { margin-top: 0; }
+    main h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray900); margin: 1.5rem 0 .5rem; }
+    main p { font-size: .98rem; color: var(--gray600); margin-bottom: 1rem; }
+    main ul { padding-left: 1.4rem; margin-bottom: 1rem; }
+    main li { font-size: .98rem; color: var(--gray600); margin-bottom: .4rem; }
+    main a { color: var(--purple); text-decoration: none; }
+    main a:hover { text-decoration: underline; }
+    main code { background: var(--gray50); padding: 2px 6px; border-radius: 4px; font-size: .88em; font-family: 'SF Mono', Menlo, monospace; }
+
+    .callout { padding: 16px 20px; border-radius: 10px; font-size: .92rem; line-height: 1.55; margin: 1rem 0; }
+    .callout-warn { background: var(--warn-bg); color: var(--warn-text); border-left: 4px solid var(--warn-text); }
+    .callout-info { background: var(--info-bg); color: var(--info-text); border-left: 4px solid var(--info-text); }
+    .callout-good { background: var(--good-bg); color: var(--good-text); border-left: 4px solid var(--good-text); }
+    .callout strong { font-weight: 700; }
+
+    footer { background: var(--navy); color: rgba(255,255,255,.7); padding: 48px 2rem 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
+    .footer-brand { font-size: 1rem; font-weight: 800; color: white; margin-bottom: .5rem; display: flex; align-items: center; gap: .4rem; }
+    .footer-tag { font-size: .8rem; color: rgba(255,255,255,.55); max-width: 320px; line-height: 1.55; }
+    .footer-meta { font-size: .75rem; color: rgba(255,255,255,.45); text-align: right; }
+    .footer-meta a { color: rgba(255,255,255,.7); text-decoration: none; }
+    .footer-meta a:hover { color: white; }
+    .footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); font-size: .72rem; color: rgba(255,255,255,.4); text-align: center; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1.1rem; font-size: .8rem; }
+      .page-hero, main, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .footer-inner { flex-direction: column; }
+      .footer-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo"><span class="nav-logo-emoji">📅</span> Skematisk</a>
+    <ul class="nav-links">
+      <li><a href="/#funktioner">Funktioner</a></li>
+      <li><a href="/#hvem">Hvem er det til</a></li>
+      <li><a href="/security.html" class="active">Sikkerhed</a></li>
+      <li><a href="/privacy.html">Privatliv</a></li>
+      <li><a href="/contact.html">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-hero">
+    <span class="preliminary-badge">FORELØBIG</span>
+    <h1>Sikkerhed</h1>
+    <p>Hvordan Skematisk er bygget til at holde dine data sikre — og hvad vi endnu ikke har færdiggjort.</p>
+  </section>
+
+  <main>
+
+    <div class="callout callout-warn">
+      <strong>Foreløbig version.</strong> Denne side dokumenterer Skematisks aktuelle sikkerhedsarkitektur, men er under udvikling. Endelig dokumentation til IT-procurement vil være klar inden første rigtige pilot. Spørg os direkte hvis I behøver mere detaljerede svar nu.
+    </div>
+
+    <h2>Arkitektur i korte træk</h2>
+    <p>Skematisk er en <strong>desktop-applikation (Electron)</strong> som installeres lokalt på medarbejdernes maskiner. Den har <strong>ingen central server</strong> der ligger i vores hænder, og <strong>ingen kundedatabase</strong> hostet hos os.</p>
+    <p>Data ligger ét af to steder:</p>
+    <ul>
+      <li><strong>Lokalt på den enkelte maskine</strong> (i Skematisks brugerdata-mappe), til offline planlægning</li>
+      <li><strong>I jeres egen Microsoft 365 OneDrive</strong>, til deling mellem flere planlæggere</li>
+    </ul>
+    <p>Vi som leverandør har <strong>ingen automatisk adgang</strong> til kundernes data. Hvis vi har brug for at hjælpe med support, beder vi jer om at sende en eksporteret fil — vi henter den ikke selv.</p>
+
+    <h2>Autentifikation</h2>
+    <p>For OneDrive-synkronisering bruger Skematisk <strong>Microsoft Entra ID OAuth</strong> (samme protokol som alle andre Microsoft 365-applikationer). Login sker via standard Microsoft-flow — vi opbevarer ikke jeres passwords, og vi har ikke jeres legitimationsoplysninger.</p>
+    <p>Krav til Skematisks adgang vises tydeligt på Microsofts samtykke-skærm når brugeren logger ind første gang:</p>
+    <ul>
+      <li><code>User.Read</code> — læs brugerprofil (navn, email)</li>
+      <li><code>Files.ReadWrite</code> — læs/skriv filer i brugerens egen OneDrive</li>
+      <li><code>offline_access</code> — undgå genlogin ved hver app-start</li>
+    </ul>
+    <p>Brugeren kan til enhver tid trække samtykket tilbage via deres Microsoft-konto.</p>
+
+    <h2>Token-opbevaring</h2>
+    <p>OAuth-tokens (de tekniske nøgler der giver Skematisk adgang til OneDrive) gemmes <strong>krypteret lokalt</strong> via operativsystemets indbyggede sikkerhed: macOS Keychain på Mac, DPAPI på Windows. Tokens forlader aldrig den enkelte maskine.</p>
+
+    <h2>Datafortrolighed</h2>
+    <p>Skematisk håndterer <strong>ingen patientdata, ingen studieoplysninger med personhenførbare detaljer</strong>. Det er et planlægningsværktøj til skemaer — undervisere, lokaler, semestre, forløb. Ingen GDPR-følsomme persondata passerer gennem appen som en del af det normale brug.</p>
+    <p>Detaljer om hvilke data der gemmes hvor findes på <a href="/privacy.html">Privatliv-siden</a>.</p>
+
+    <h2>Levering og opdateringer</h2>
+    <div class="callout callout-info">
+      <strong>Under udvikling:</strong> Kodesignering med <strong>Windows EV-certifikat</strong> er planlagt inden første pilotinstallation. Det betyder at Windows ikke viser SmartScreen-advarsler ved installation. Microsoft Publisher Verification (fjerner "unverified" badge på samtykke-skærmen) er ligeledes på vej.
+    </div>
+
+    <h2>Tredjeparts-afhængigheder</h2>
+    <p>Skematisk er bygget på Electron + standard JavaScript-biblioteker. Auth-flow bruger <code>@azure/msal-node</code> (Microsofts officielle bibliotek). Vi vedligeholder en intern liste over alle anvendte biblioteker og deres versioner; den kan deles med jeres IT efter aftale.</p>
+
+    <h2>Sikkerhedshærdning — kommende</h2>
+    <p>Følgende er planlagt inden første institutionel pilot:</p>
+    <ul>
+      <li>Electron context isolation (defense-in-depth mod kompromitterede afhængigheder)</li>
+      <li>Content Security Policy på alle sider</li>
+      <li>Microsoft Publisher Verification</li>
+      <li>Automatiserede sikkerhedstest i CI/CD</li>
+      <li>Sårbarhedsovervågning via Dependabot</li>
+    </ul>
+
+    <h2>Kontakt om sikkerhed</h2>
+    <p>Spørgsmål, sikkerhedshenvendelser eller dokumentationsønsker: <a href="mailto:subazz@hotmail.com?subject=Skematisk%20%E2%80%94%20sikkerhed">skriv til os</a>. Sårbarhedsrapporter behandles fortroligt.</p>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">📅 Skematisk</div>
+        <div class="footer-tag">Koordineret skemaplanlægning til videregående uddannelser. Udviklet i Danmark.</div>
+      </div>
+      <div class="footer-meta">
+        <div><a href="/security.html">Sikkerhed</a> · <a href="/privacy.html">Privatliv</a> · <a href="/contact.html">Kontakt</a></div>
+        <div style="margin-top:.6rem;color:rgba(255,255,255,.55);">Status: Beta — pilotprojekter åbne</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Skematisk. Alle rettigheder forbeholdes.
+    </div>
+  </footer>
+
+</body>
+</html>
