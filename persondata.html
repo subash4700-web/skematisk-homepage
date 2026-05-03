@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privatliv — Skematisk</title>
-  <meta name="description" content="Skematisks privatlivspolitik: ingen kundedata på vores servere, OneDrive-baseret arkitektur, GDPR-status.">
+  <title>Persondata & GDPR — Skematisk</title>
+  <meta name="description" content="Skematisks persondatapolitik og GDPR-position: ingen kundedata på vores servere, OneDrive-baseret arkitektur, vi er ikke databehandler.">
   <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">📅</text></svg>'>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -75,15 +75,15 @@
       <li><a href="/#funktioner">Funktioner</a></li>
       <li><a href="/#hvem">Hvem er det til</a></li>
       <li><a href="/security.html">Sikkerhed</a></li>
-      <li><a href="/privacy.html" class="active">Privatliv</a></li>
+      <li><a href="/persondata.html" class="active">Persondata</a></li>
       <li><a href="/contact.html">Kontakt</a></li>
     </ul>
   </nav>
 
   <section class="page-hero">
     <span class="preliminary-badge">FORELØBIG</span>
-    <h1>Privatliv</h1>
-    <p>Hvilke data Skematisk håndterer — og hvilke data vi som leverandør aldrig ser.</p>
+    <h1>Persondata &amp; GDPR</h1>
+    <p>Hvilke data Skematisk håndterer, hvor de ligger, og hvorfor vi som leverandør ikke er databehandler.</p>
   </section>
 
   <main>
@@ -127,8 +127,49 @@
       <li><strong>Lokalt eksporterede backup-filer</strong> — Skematisk laver automatiske lokale backups (max 30 stk, ældste roteres ud).</li>
     </ul>
 
-    <h2>Vores rolle som leverandør</h2>
-    <p>Vi (Skematisk-udvikleren) er <strong>ikke databehandler</strong> i GDPR-forstand for de data I lægger ind i appen — fordi vi simpelthen ikke har adgang til dem. Microsoft (jeres OneDrive-udbyder) er den faktiske databehandler for hostede filer, dækket af jeres eksisterende Microsoft 365-aftaler.</p>
+    <h2>GDPR-rollefordeling</h2>
+    <p>Den korte version af hvem der er hvad i GDPR-terminologi:</p>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem;">
+      <thead>
+        <tr style="background:var(--gray50);">
+          <th style="text-align:left;padding:10px 12px;border:1px solid var(--gray100);font-weight:700;">Rolle</th>
+          <th style="text-align:left;padding:10px 12px;border:1px solid var(--gray100);font-weight:700;">Hvem</th>
+          <th style="text-align:left;padding:10px 12px;border:1px solid var(--gray100);font-weight:700;">For hvad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);"><strong>Dataansvarlig</strong></td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Jer (kunden)</td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Alle data I lægger i Skematisk</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);"><strong>Databehandler</strong></td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Microsoft (Microsoft 365 / OneDrive)</td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Hosting af jeres data — dækket af jeres eksisterende M365-aftaler</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);"><strong>Skematisk-leverandøren</strong></td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Subash Suntharalingam (udvikler)</td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);"><strong>Hverken dataansvarlig eller databehandler</strong> — vi har ingen adgang til jeres data</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Da vi som leverandør ikke har adgang til jeres data, falder de fleste af GDPR's tunge forpligtelser (databehandleraftale, breach-notification fra os, audit-ret, sub-processor-godkendelse) <strong>ikke på os</strong> — de håndteres mellem jer og Microsoft via jeres eksisterende M365-aftaler. Hvis jeres jurister alligevel ønsker en formel "vi har ingen data"-erklæring fra os, leverer vi gerne en sådan.</p>
+
+    <h2>Konkrete GDPR-aligned tiltag i Skematisk-app'en</h2>
+    <div class="callout callout-warn">
+      <strong>Skematisk er ikke "GDPR-certificeret"</strong> — der findes ikke en officiel certificering for GDPR. I stedet følger vi <strong>principperne</strong> i Persondataforordningen og kan dokumentere konkrete tiltag pr. område:
+    </div>
+    <ul>
+      <li><strong>Dataminimering (art. 5.1.c):</strong> Skematisk indsamler kun planlægningsmetadata — ingen patientdata, ingen studieoplysninger med personhenførbare detaljer (no-PII scope).</li>
+      <li><strong>Formålsbegrænsning (art. 5.1.b):</strong> Data bruges udelukkende til skemaplanlægning. Ingen telemetri, ingen analytics, ingen sekundære formål.</li>
+      <li><strong>Opbevaringsbegrænsning (art. 5.1.e):</strong> Data ligger i jeres egen Microsoft 365 — I styrer retention og sletning via jeres M365-administration.</li>
+      <li><strong>Integritet og fortrolighed (art. 5.1.f):</strong> OAuth-tokens krypteret med OS-niveau kryptering (Keychain/DPAPI). TLS overalt. Tokens forlader aldrig main-process.</li>
+      <li><strong>Indbygget databeskyttelse (art. 25):</strong> Ingen tracking på hjemmesiden, ingen cookies, ingen analytics-script. Privacy-by-default arkitektur — kunden ejer både infrastruktur og data.</li>
+      <li><strong>Lawful basis:</strong> Behandling sker på grundlag af jeres egen retsgrundlag som dataansvarlig — typisk legitim interesse (skemaplanlægning er en kerneopgave) eller samtykke fra de undervisere der indgår i skemaerne.</li>
+      <li><strong>Brud på datasikkerheden (art. 33-34):</strong> Da vi ikke har data, kan vi ikke have et brud på dem. Hvis Skematisk-koden selv har en sårbarhed der kunne udsætte jeres data, oplyser vi det inden 72 timer via vores <a href="/security.html">sårbarhedsdisclosure</a>.</li>
+    </ul>
 
     <h2>Cookies og sporing på denne hjemmeside</h2>
     <p>Hjemmesiden <code>skematisk.dk</code> sætter <strong>ingen cookies</strong> og bruger <strong>ingen analytics-tracking</strong> (Google Analytics el. lign.). Vi har ingen behov for at tracke hvem der besøger siden.</p>
@@ -140,8 +181,17 @@
     <h2>Support og fejlfinding</h2>
     <p>Hvis I beder om hjælp til en konkret fil, eksporterer I selv filen og sender den. Vi henter aldrig data fra jeres systemer eller OneDrive uden eksplicit handling fra jer. Efter support er afsluttet, sletter vi vores lokale kopi.</p>
 
-    <h2>Jeres rettigheder</h2>
-    <p>Da vi som udgangspunkt ikke har persondata om jer eller jeres brugere, har I fuld kontrol gennem jeres egen Microsoft 365-administration. Hvis I undtagelsesvis har sendt os data via support-flow, kan I anmode om indsigt eller sletning ved at <a href="/contact.html">kontakte os</a>.</p>
+    <h2>De registreredes rettigheder (GDPR art. 15-22)</h2>
+    <p>Da vi som udgangspunkt ikke har persondata om jer eller jeres brugere, håndteres de registreredes rettigheder gennem jeres egen Microsoft 365-administration:</p>
+    <ul>
+      <li><strong>Indsigt</strong> — i de filer Skematisk har skrevet til OneDrive: tilgås direkte via OneDrive web</li>
+      <li><strong>Berigtigelse</strong> — direkte i Skematisk-app'en</li>
+      <li><strong>Sletning ("ret til at blive glemt")</strong> — sletning af filer i OneDrive eller afinstallering af Skematisk-app'en</li>
+      <li><strong>Begrænsning af behandling</strong> — afinstaller eller tilbagekald OAuth-samtykke i Microsoft-kontoindstillingerne</li>
+      <li><strong>Dataportabilitet</strong> — eksporter til JSON via Skematisk's "Gem"-funktion</li>
+      <li><strong>Indsigelse</strong> — kontakt jeres egen Skematisk-administrator</li>
+    </ul>
+    <p>Hvis I undtagelsesvis har sendt os data via support-flow, kan I anmode om indsigt eller sletning ved at <a href="/contact.html">kontakte os</a>.</p>
 
     <h2>Ændringer</h2>
     <p>Når denne side opgraderes fra "FORELØBIG" til den endelige privatlivspolitik, vil alle pilotkunder få direkte besked. Indtil da kan dokumentet ændre sig løbende.</p>
@@ -155,7 +205,7 @@
         <div class="footer-tag">Koordineret skemaplanlægning til videregående uddannelser. Udviklet i Danmark.</div>
       </div>
       <div class="footer-meta">
-        <div><a href="/security.html">Sikkerhed</a> · <a href="/privacy.html">Privatliv</a> · <a href="/contact.html">Kontakt</a></div>
+        <div><a href="/security.html">Sikkerhed</a> · <a href="/persondata.html">Persondata</a> · <a href="/contact.html">Kontakt</a></div>
         <div style="margin-top:.6rem;color:rgba(255,255,255,.55);">Status: Beta — pilotprojekter åbne</div>
       </div>
     </div>

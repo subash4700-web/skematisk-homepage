@@ -75,7 +75,7 @@
       <li><a href="/#funktioner">Funktioner</a></li>
       <li><a href="/#hvem">Hvem er det til</a></li>
       <li><a href="/security.html" class="active">Sikkerhed</a></li>
-      <li><a href="/privacy.html">Privatliv</a></li>
+      <li><a href="/persondata.html">Persondata</a></li>
       <li><a href="/contact.html">Kontakt</a></li>
     </ul>
   </nav>
@@ -116,12 +116,79 @@
 
     <h2>Datafortrolighed</h2>
     <p>Skematisk håndterer <strong>ingen patientdata, ingen studieoplysninger med personhenførbare detaljer</strong>. Det er et planlægningsværktøj til skemaer — undervisere, lokaler, semestre, forløb. Ingen GDPR-følsomme persondata passerer gennem appen som en del af det normale brug.</p>
-    <p>Detaljer om hvilke data der gemmes hvor findes på <a href="/privacy.html">Privatliv-siden</a>.</p>
+    <p>Detaljer om hvilke data der gemmes hvor findes på <a href="/persondata.html">Persondata-siden</a>.</p>
 
     <h2>Levering og opdateringer</h2>
     <div class="callout callout-info">
       <strong>Under udvikling:</strong> Kodesignering med <strong>Windows EV-certifikat</strong> er planlagt inden første pilotinstallation. Det betyder at Windows ikke viser SmartScreen-advarsler ved installation. Microsoft Publisher Verification (fjerner "unverified" badge på samtykke-skærmen) er ligeledes på vej.
     </div>
+
+    <h2>Standarder og certificeringer</h2>
+    <div class="callout callout-warn">
+      <strong>Skematisk er ikke selv certificeret</strong> efter ISO 27001, SOC 2 eller lignende — som soloprodukt på vores nuværende skala ville det være urealistisk. Vi følger derimod <strong>principperne</strong> hvor de er relevante og kan dokumentere konkrete kontroller pr. område. De tunge certificeringer håndteres af vores infrastruktur (Microsoft 365, Vercel) som er certificeret på vegne af alle deres kunder.
+    </div>
+
+    <h3>ISO 27001 — Aligned, ikke certificeret</h3>
+    <p>Som desktop-applikation der gemmer data i kundens egen Microsoft 365, ligger størstedelen af de relevante kontroller hos Microsoft (ISO 27001-certificeret). For Skematisk-koden følger vi disse aligned-praksis:</p>
+    <ul>
+      <li>Krypterede OAuth-tokens (macOS Keychain / Windows DPAPI)</li>
+      <li>Microsoft Entra ID som identitetsprovider — ingen egen brugerdatabase</li>
+      <li>Least-privilege adgangsmodel — mindste nødvendige Graph-permissions</li>
+      <li>Tokens forbliver i main-process (renderer ser dem aldrig)</li>
+      <li>Pinned dependencies + npm audit</li>
+      <li>Sårbarhedsdisclosure-kanal (security-email)</li>
+      <li>Dokumenteret risikovurdering (intern)</li>
+      <li>Auto-backup hver 5. minut + OneDrive version history</li>
+    </ul>
+
+    <h3>GDPR / Persondataforordningen — Aligned, ikke databehandler</h3>
+    <p>Vi opbevarer ingen kundedata på egne servere. Dermed er vi <strong>ikke databehandler</strong> i GDPR-forstand — Microsoft (jeres OneDrive-udbyder) er den faktiske databehandler dækket af jeres egne Microsoft 365-aftaler.</p>
+    <ul>
+      <li>Ingen telemetri eller analytics i Skematisk-app</li>
+      <li>Ingen patientdata, ingen studieoplysninger med personhenførbare detaljer (no-PII scope)</li>
+      <li>Dataminimering — kun planlægningsmetadata</li>
+      <li>Datalagring i jeres egen Microsoft 365 tenant — I bestemmer placering, retention, sletning</li>
+      <li>Hjemmeside skematisk.dk: ingen cookies, ingen tracking</li>
+    </ul>
+    <p>Detaljeret behandling af persondata-spørgsmål: se <a href="/persondata.html">Persondata &amp; GDPR</a>.</p>
+
+    <h3>OWASP — Aligned hvor relevant for desktop-app</h3>
+    <p>OWASP Top 10 fokuserer primært på web-applikationer; for en Electron-desktop-app er en delmængde relevant:</p>
+    <ul>
+      <li>Ingen brugerinput-renderet HTML uden eskapering (XSS-bevidsthed)</li>
+      <li>Pinned npm-dependencies + automatiseret sårbarhedsscanning</li>
+      <li>Sikker udviklingspraksis: dokumenteret arkitektur, code reviews, atomare commits</li>
+      <li>Defensive token-håndtering (aldrig logget, aldrig sendt til renderer)</li>
+    </ul>
+
+    <h3>Infrastruktur-arvede certificeringer</h3>
+    <p>Det meste af det "tunge" sikkerhedsarbejde gøres af de underliggende leverandører:</p>
+    <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem;">
+      <thead>
+        <tr style="background:var(--gray50);">
+          <th style="text-align:left;padding:10px 12px;border:1px solid var(--gray100);font-weight:700;">Lag</th>
+          <th style="text-align:left;padding:10px 12px;border:1px solid var(--gray100);font-weight:700;">Leverandør</th>
+          <th style="text-align:left;padding:10px 12px;border:1px solid var(--gray100);font-weight:700;">Certificeringer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Datalagring</td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Microsoft 365 OneDrive</td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">ISO 27001 · ISO 27018 · SOC 2 Type II · GDPR</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Autentifikation</td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Microsoft Entra ID</td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">ISO 27001 · SOC 2</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Hjemmeside</td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">Vercel</td>
+          <td style="padding:10px 12px;border:1px solid var(--gray100);">SOC 2 Type II</td>
+        </tr>
+      </tbody>
+    </table>
 
     <h2>Tredjeparts-afhængigheder</h2>
     <p>Skematisk er bygget på Electron + standard JavaScript-biblioteker. Auth-flow bruger <code>@azure/msal-node</code> (Microsofts officielle bibliotek). Vi vedligeholder en intern liste over alle anvendte biblioteker og deres versioner; den kan deles med jeres IT efter aftale.</p>
@@ -148,7 +215,7 @@
         <div class="footer-tag">Koordineret skemaplanlægning til videregående uddannelser. Udviklet i Danmark.</div>
       </div>
       <div class="footer-meta">
-        <div><a href="/security.html">Sikkerhed</a> · <a href="/privacy.html">Privatliv</a> · <a href="/contact.html">Kontakt</a></div>
+        <div><a href="/security.html">Sikkerhed</a> · <a href="/persondata.html">Persondata</a> · <a href="/contact.html">Kontakt</a></div>
         <div style="margin-top:.6rem;color:rgba(255,255,255,.55);">Status: Beta — pilotprojekter åbne</div>
       </div>
     </div>
