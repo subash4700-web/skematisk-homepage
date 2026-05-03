@@ -92,6 +92,11 @@
     .footer-meta a:hover { color: white; }
     .footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); font-size: .72rem; color: rgba(255,255,255,.4); text-align: center; }
 
+    /* ── FEATURE SUBGROUP ── */
+    .feature-subgroup { margin-bottom: 2.5rem; }
+    .feature-subgroup:last-child { margin-bottom: 0; }
+    .feature-subgroup-title { font-size: .82rem; font-weight: 800; color: var(--gray400); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; padding-left: 4px; }
+
     /* ── COMPARE GRID (Foer/Med Skematisk) ── */
     .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
     .compare-col { padding: 24px 22px; border-radius: 14px; border: 1.5px solid; }
@@ -213,74 +218,78 @@
     <div class="section-eyebrow">Funktioner</div>
     <h2 class="section-h2">Hvad Skematisk dækker</h2>
     <p class="section-sub">Hele planlægningsstacken i ét værktøj — fra årshjul til enkelt-lektion. Ingen kontekstskift mellem regneark, kalendere og delte lister.</p>
-    <div class="feature-grid">
 
-      <div class="feature">
-        <span class="feature-emoji">🚪</span>
-        <h3>Lokalefordeling på tværs</h3>
-        <p>Visualisér lokalebelastning på tværs af uddannelser og semestre. Find ledige lokaler hurtigt, se hvor flaskehalse opstår, undgå dobbeltbookninger.</p>
+    <div class="feature-subgroup">
+      <div class="feature-subgroup-title">Visualisering & overblik</div>
+      <div class="feature-grid">
+        <div class="feature">
+          <span class="feature-emoji">🔥</span>
+          <h3>Gantt + heatmap på forløbsoversigt</h3>
+          <p>Gantt-kort over forløb på tværs af uger og semestre, med heatmap-coloring der viser lektionsbelastning. Tunge og lette uger falder i øjnene.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">📊</span>
+          <h3>Interaktivt Gantt-kort til indledende fordeling</h3>
+          <p>Stræk, skub og fordel forløbsvinduer direkte. Hold-, underviser- og lokale-strain opdateres live mens du flytter.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">📅</span>
+          <h3>Ugeoversigt for underviserbelastning</h3>
+          <p>Hver underviser uge-for-uge. Spot overbookede perioder og ujævn fordeling før semestret begynder.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">🔎</span>
+          <h3>Fleksibel filtrering</h3>
+          <p>Filtrér efter semestre, undervisere, hold, lokaler — kombineret eller alle. Få netop det udsnit du arbejder på.</p>
+        </div>
       </div>
+    </div>
 
-      <div class="feature">
-        <span class="feature-emoji">👨‍🏫</span>
-        <h3>Underviser-modul</h3>
-        <p>Personligt skema, fagkompetencer, fastlåste dage, kampusspecifikke tilgængeligheder, og ferier/blokeringer i to niveauer: <strong>blød</strong> (advarsel ved konflikt) og <strong>hård</strong> (systemet forhindrer placering). Underviserens reelle tilgængelighed er altid synlig under planlægning.</p>
+    <div class="feature-subgroup">
+      <div class="feature-subgroup-title">Planlægnings-elementer</div>
+      <div class="feature-grid">
+        <div class="feature">
+          <span class="feature-emoji">🚪</span>
+          <h3>Lokalefordeling på tværs</h3>
+          <p>Lokalebelastning på tværs af uddannelser og semestre. Find ledige lokaler, undgå dobbeltbookninger.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">👨‍🏫</span>
+          <h3>Underviser-modul</h3>
+          <p>Personligt skema, fagkompetencer, kampusspecifikke tilgængeligheder, ferier/blokeringer i to niveauer: <strong>blød</strong> (advarsel) og <strong>hård</strong> (forhindrer placering).</p>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">📈</span>
+          <h3>Stamhold-progression</h3>
+          <p>Følg holdets progression med SOLO/Bloom-taksonomi. Auto-detektion af viden/færdigheder/kompetencer fra læringsmål.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">📝</span>
+          <h3>Eksamensplanlægning</h3>
+          <p>Eksamener, prøver og deadlines integreret med forløb og semestre. Skematisk hjælper med at sikre at forløb afsluttes <strong>inden afprøvning</strong>.</p>
+        </div>
       </div>
+    </div>
 
-      <div class="feature">
-        <span class="feature-emoji">📈</span>
-        <h3>Stamhold-progression</h3>
-        <p>Følg holdets progression gennem forløb og emner med SOLO/Bloom-taksonomi. Auto-detektion af viden/færdigheder/kompetencer på baggrund af læringsmål.</p>
+    <div class="feature-subgroup">
+      <div class="feature-subgroup-title">Regler & datadeling</div>
+      <div class="feature-grid">
+        <div class="feature">
+          <span class="feature-emoji">📜</span>
+          <h3>Regler for forløbssamspil</h3>
+          <p>Definér jeres egne regler — inden for et forløb (rækkefølge, lab/teori, max pr. dag) og på tværs (delt undervisning, prerequisites). Overskridelser rapporteres som konflikter.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">☁️</span>
+          <h3>OneDrive-synkronisering</h3>
+          <p>Gem og del via jeres egen OneDrive. Ingen ekstern server, ingen leverandørafhængighed — data bliver i jeres Microsoft 365.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-emoji">📤</span>
+          <h3>Stærk eksport</h3>
+          <p>Excel, JSON og PDF for forskellige overblik (per underviser, forløb, stamhold). <span style="background:#fef9c3;color:#92400e;border-radius:4px;padding:1px 5px;font-size:.78em;font-weight:700;">PÅ ROADMAP</span> ICS-eksport og kalenderabonnement.</p>
+        </div>
       </div>
-
-      <div class="feature">
-        <span class="feature-emoji">📝</span>
-        <h3>Eksamensplanlægning</h3>
-        <p>Eksamener, prøver og deadlines integreret med forløb og semestre. Skematisk hjælper dig med at placere forløbet fornuftigt i forhold til afprøvningen — så du ikke ved et uheld planlægger en prøve <strong>før pensum er undervist</strong>. Konflikter med undervisning og lokaler markeres direkte i planen.</p>
-      </div>
-
-      <div class="feature">
-        <span class="feature-emoji">🔥</span>
-        <h3>Gantt + heatmap på forløbsoversigt</h3>
-        <p>Gantt-kort over forløb på tværs af uger og semestre — med heatmap-coloring der viser lektionsbelastning. Du ser <em>hvilke</em> forløb der løber hvornår og <em>hvor tungt</em> hvert tidspunkt er, samtidig. Tunge og lette uger falder i øjnene uden at læse tal.</p>
-      </div>
-
-      <div class="feature">
-        <span class="feature-emoji">📊</span>
-        <h3>Interaktivt Gantt-kort til indledende fordeling</h3>
-        <p>Stræk, skub og fordel forløbsvinduer direkte på Gantt-kortet. Mens du flytter, opdateres <strong>hold-, underviser- og lokale-strain</strong> live — så du ser konsekvensen af hver beslutning før du sætter den fast. Den indledende grov-fordeling bliver et hurtigt, visuelt arbejde i stedet for en regneark-øvelse.</p>
-      </div>
-
-      <div class="feature">
-        <span class="feature-emoji">📅</span>
-        <h3>Ugeoversigt for underviserbelastning</h3>
-        <p>Se hver enkelt undervisers belastning uge-for-uge. Identificer overbookede perioder, ferieproblemer og ujævn fordeling allerede ved planlægning — ikke når semestret er begyndt.</p>
-      </div>
-
-      <div class="feature">
-        <span class="feature-emoji">🔎</span>
-        <h3>Fleksibel filtrering</h3>
-        <p>Filtrér efter én eller flere aktører — semestre, undervisere, hold, lokaler — kombineret eller alle på én gang. Få netop det udsnit du har brug for, uden at miste resten af konteksten.</p>
-      </div>
-
-      <div class="feature">
-        <span class="feature-emoji">📜</span>
-        <h3>Regler for forløbssamspil</h3>
-        <p>Definér jeres egne regler for hvordan undervisningen skal spille sammen — både <strong>inden for et forløb</strong> (rækkefølge, lab/teori-mønstre, max pr. dag) og <strong>på tværs af forløb</strong> (delt undervisning, parallelle eksamener, prerequisites). Overskridelser rapporteres automatisk som konflikter, så reglerne ikke bare lever i et dokument — de håndhæves i selve planen.</p>
-      </div>
-
-      <div class="feature">
-        <span class="feature-emoji">☁️</span>
-        <h3>OneDrive-synkronisering</h3>
-        <p>Gem og del planer via jeres egen OneDrive. Ingen ekstern server, ingen leverandørafhængighed — dine data forbliver i jeres Microsoft 365.</p>
-      </div>
-
-      <div class="feature">
-        <span class="feature-emoji">📤</span>
-        <h3>Stærk eksport</h3>
-        <p>Eksportér til Excel, JSON og PDF for forskellige overblik (per underviser, per forløb, per stamhold). <span style="background:#fef9c3;color:#92400e;border-radius:4px;padding:1px 5px;font-size:.78em;font-weight:700;">PÅ ROADMAP</span> ICS-eksport og kalenderabonnement (inkl. læringsmål og pensum), så studerende og kollegaer kan have opdaterede planer direkte i deres egen kalender. Endnu ikke implementeret.</p>
-      </div>
-
     </div>
   </section>
 
