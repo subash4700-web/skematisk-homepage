@@ -92,6 +92,20 @@
     .footer-meta a:hover { color: white; }
     .footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1); font-size: .72rem; color: rgba(255,255,255,.4); text-align: center; }
 
+    /* ── COMPARE GRID (Foer/Med Skematisk) ── */
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .compare-col { padding: 24px 22px; border-radius: 14px; border: 1.5px solid; }
+    .compare-before { background: var(--gray50); border-color: var(--gray100); }
+    .compare-after { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-color: rgba(102,126,234,0.4); }
+    .compare-eyebrow { font-size: .68rem; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; margin-bottom: 1rem; }
+    .compare-before .compare-eyebrow { color: var(--gray400); }
+    .compare-after .compare-eyebrow { color: var(--purple); }
+    .compare-col ul { list-style: none; padding: 0; margin: 0; }
+    .compare-col li { padding: 6px 0; padding-left: 22px; font-size: .9rem; line-height: 1.55; color: var(--gray600); position: relative; }
+    .compare-col li::before { position: absolute; left: 0; top: 5px; font-weight: 700; }
+    .compare-before li::before { content: '×'; color: #9CA3AF; font-size: 1.1em; line-height: 1; top: 6px; }
+    .compare-after li::before { content: '✓'; color: var(--purple); font-size: .95em; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       nav { padding: 0 1.25rem; }
@@ -101,6 +115,7 @@
       .pilot-inner { padding: 36px 24px; }
       .footer-inner { flex-direction: column; }
       .footer-meta { text-align: left; }
+      .compare-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -157,20 +172,39 @@
 
     </div>
 
-    <div style="margin-top:2.5rem;max-width:720px;margin-left:auto;margin-right:auto;font-size:.95rem;color:var(--gray600);line-height:1.65;">
-      <p style="text-align:center;margin-bottom:1.5rem;">
+    <div style="margin-top:2.5rem;max-width:880px;margin-left:auto;margin-right:auto;">
+      <p style="text-align:center;font-size:1.05rem;color:var(--gray600);line-height:1.6;margin-bottom:2rem;">
         <strong>Du planlægger, Skematisk stilladser</strong> — og hjælper dig med at overholde gældende rammer og regler.
       </p>
-      <p style="margin-bottom:1rem;">
-        <strong>Den klassiske flaskehals i dag:</strong> for dem der planlægger på forløbs- og semester-niveau er det svært at se alle de forhold der spiller ind — er lokalet tilgængeligt? Er underviseren ledig den dag? Hvad med skemablokeringer, ferieønsker, og andre forløbs krav på de samme ressourcer? Planen sendes til skemaplanlæggeren, som så opdager at den ikke kan overholdes. Det udløser en runde mails, rettelser, ny indsendelse, ny gennemgang — gentagne gange pr. semester pr. forløb.
+
+      <div class="compare-grid">
+        <div class="compare-col compare-before">
+          <div class="compare-eyebrow">Uden Skematisk</div>
+          <ul>
+            <li>Forløbs- og semester-planlæggere mangler samlet overblik (lokaler, undervisere, blokeringer, ferier)</li>
+            <li>Sender deres plan til skemaplanlæggeren</li>
+            <li>Skemaplanlæggeren opdager at den ikke kan overholdes</li>
+            <li>Runde af mails, rettelser, ny indsendelse</li>
+            <li>Gentages flere gange pr. semester pr. forløb</li>
+          </ul>
+        </div>
+        <div class="compare-col compare-after">
+          <div class="compare-eyebrow">Med Skematisk</div>
+          <ul>
+            <li>Alle planlægger inden for præcis de samme rammer</li>
+            <li>Konflikter fanges undervejs i den enkeltes egen planlægning</li>
+            <li>Planen er overholdbar når den når skemaplanlæggeren</li>
+            <li>Færre iterations-runder, mindre koordinerings-arbejde</li>
+            <li>Tid tilbage til det undervisnings-faglige arbejde</li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:1.75rem;font-size:.95rem;color:var(--gray600);line-height:1.55;">
+        For en institution med flere uddannelser og <strong>30+ planlæggere</strong> kan det realistisk frigøre <strong>flere hundrede arbejdstimer pr. år</strong>.
       </p>
-      <p style="margin-bottom:1rem;">
-        <strong>Skematisk skærer iterations-rundernes tidstab fra ved kilden:</strong> planlæggere på alle niveauer arbejder inden for præcis de samme rammer som skemaplanlæggeren. Konflikter fanges undervejs i deres egen planlægning, ikke efter indsendelse. Hver mail-runde der spares er direkte tid tilbage til alle led i planlægningen — fra koordinator til skemaplanlægger til uddannelsesadministration.
-      </p>
-      <p style="margin-bottom:1rem;background:#f5f3ff;border-left:3px solid var(--purple);padding:14px 18px;border-radius:0 8px 8px 0;font-size:.92rem;">
-        <strong>Konkret betydning:</strong> for en uddannelsesinstitution med flere uddannelser og 30+ planlæggere kan det realistisk frigøre <strong>flere hundrede arbejdstimer pr. år</strong> — ressourcer der i dag bindes i koordinerings-mails, rettelser og iterationer. Tid der i stedet kan bruges på det undervisnings-faglige arbejde.
-      </p>
-      <div style="margin-top:1.5rem;font-size:.85rem;color:var(--gray400);font-style:italic;text-align:center;line-height:1.6;">På roadmap: direkte integration med jeres eksisterende kalender- og skemasystemer fjerner den krævende manuelle dobbelt-indtastning og de indtastningsfejl der følger med. Også på vej: kalenderabonnement, så studerende og kollegaer får opdaterede planer direkte i deres egen kalender.</div>
+
+      <div style="margin-top:1.5rem;font-size:.85rem;color:var(--gray400);font-style:italic;text-align:center;line-height:1.6;max-width:660px;margin-left:auto;margin-right:auto;">På roadmap: direkte integration med jeres eksisterende kalender- og skemasystemer fjerner den krævende manuelle dobbelt-indtastning og de indtastningsfejl der følger med. Også på vej: kalenderabonnement, så studerende og kollegaer får opdaterede planer direkte i deres egen kalender.</div>
     </div>
   </section>
 
