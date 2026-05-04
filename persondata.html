@@ -181,6 +181,21 @@
     <h2>Support og fejlfinding</h2>
     <p>Hvis I beder om hjælp til en konkret fil, eksporterer I selv filen og sender den. Vi henter aldrig data fra jeres systemer eller OneDrive uden eksplicit handling fra jer. Efter support er afsluttet, sletter vi vores lokale kopi.</p>
 
+    <h2>Valgfri AI-funktion (Anthropic Claude)</h2>
+    <p>Skematisk indeholder en <strong>valgfri</strong> AI-assist funktion i Masterplan-modulet, der bruger Anthropic Claude til at hjælpe med kompleks planlægning. Funktionen er <strong>opt-in og kræver at I selv indtaster en API-nøgle</strong> fra <a href="https://console.anthropic.com" rel="noopener" target="_blank">console.anthropic.com</a> i app'ens indstillinger. Uden API-nøgle er funktionen inaktiv og ingen data sendes til Anthropic.</p>
+    <p>Når funktionen aktivt bruges:</p>
+    <ul>
+      <li><strong>Hvad sendes:</strong> kun den konkrete planlægnings-prompt I aktivt udløser — ikke generelt jeres data, ingen baggrundskald.</li>
+      <li><strong>Hvor sendes det:</strong> direkte fra app'en til <code>api.anthropic.com</code> (Anthropic, USA). Skematisk fungerer som transport — vi har ikke adgang til indholdet.</li>
+      <li><strong>API-nøgle:</strong> gemmes lokalt i app'en (jeres egen Microsoft tenant via Electron's safeStorage). Bliver aldrig sendt til Skematisk-leverandøren.</li>
+      <li><strong>Anthropics behandling:</strong> følger deres <a href="https://www.anthropic.com/legal/privacy" rel="noopener" target="_blank">privacy policy</a>. Anthropic gemmer ikke jeres prompts til træning af modeller (per deres erhvervs-vilkår).</li>
+      <li><strong>Inkluder ikke persondata:</strong> Skematisks pitch er kvalitetskontrol uden persondata — undgå at inkludere CPR-numre, navne på studerende eller anden identificerbar info i AI-prompts.</li>
+    </ul>
+    <p>I kan slå funktionen helt fra ved at slette API-nøglen i app'ens indstillinger. Skematisks kerne-funktionalitet (planlægning, konflikt-detektion, eksport) virker fuldt ud uden AI-funktionen.</p>
+
+    <h2>Tredjepartsbiblioteker — bundet ind, ingen runtime-CDN</h2>
+    <p>Skematisk bruger to open source-biblioteker (xlsx for Excel-eksport og Chart.js for grafer). Disse er <strong>bundlet lokalt</strong> i app'en og hentes ikke fra eksterne CDN'er ved kørsel. Det betyder ingen IP/user-agent-leak til Cloudflare, jsDelivr eller andre CDN'er, og app'en virker offline.</p>
+
     <h2>De registreredes rettigheder (GDPR art. 15-22)</h2>
     <p>Da vi som udgangspunkt ikke har persondata om jer eller jeres brugere, håndteres de registreredes rettigheder gennem jeres egen Microsoft 365-administration:</p>
     <ul>
